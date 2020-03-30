@@ -1,0 +1,438 @@
+<!Doctype html>
+<html>
+<head>
+<metachar = 'UTF-8'>
+<title>StyleOne</title>
+
+<script>
+function Student()
+{
+this.rollNumber=0;
+this.name=' ';
+this.address=' ';
+this.city=null;
+this.gender=' ';
+this.indian=false;
+this.date=' ';
+}
+
+function City()
+{
+this.name=' ';
+this.code=-1;
+}
+function createSelectStudentRowHandler(row,i)
+{
+
+return function(){
+selectRow(row,i)
+} <!-- this is an anonymous function which will store the current value of the loop i and call the selectrow function with i as argument -->
+}
+
+function createStudentEditHandler(i)
+{
+
+return function(){
+editStudent(i);
+};
+}
+
+function createStudentDeleteHandler(i)
+{
+
+return function(){
+deleteStudent(i);
+};
+}
+
+function createDetailsViewGridHandler(i)
+{
+return function(){
+switchToDetailsView(i);
+};
+}
+function editStudent(i)
+{
+var detailsViewContainer = document.getElementById('detailsViewContainer');
+var division=document.getElementById('editStudentDivision');
+var form=document.getElementById('studentEditForm');
+division.style.view='block';
+detailsViewcontainer.style.display='none';
+var name=form.name;
+name.value = viewModel.students[i].name;	
+}
+
+function deleteStudent(i)
+{
+var form =document.getElementById('studentDeleteForm');
+var name = document.getElementById('studentDeleteName');
+name.value = viewModel.students[i].name;
+form.submit();
+}
+
+function switchToDetailsView(i)
+{
+var viewContainerDivision = document.getElementById('viewContainerDivision');
+var viewContainer = document.getElementById('viewContainer');
+var detailsViewContainer = document.getElementById('detailsViewContainer');
+viewContainer.style.display='none';
+viewContainerDivision.style.display = 'none' ;
+var name = document.getElementById('studentViewGridName');
+var roll = document.getElementById('studentViewGridRollNumber');
+var add = document.getElementById('studentViewGridAddress');
+var backButton = document.getElementById('backButton');
+backButton.style.visibility = 'visible';
+backButton.innerHTML = 'Back<-';
+name.innerHTML = viewModel.students[i].name;
+roll.innerHTML  = viewModel.students[i].rollNumber;
+add.innerHTML  = viewModel.students[i].address;
+detailsViewContainer.style.display='block';
+
+}
+function swicthToGridView()
+{
+var viewContainerDivision = document.getElementById('viewContainerDivision');
+var viewContainer = document.getElementById('viewContainer');
+var detailsViewContainer = document.getElementById('detailsViewContainer');
+detailsViewContainer.style.display= 'none';
+viewContainer.style.display = 'block';
+viewContainerDivision.style.display='block';
+
+}
+function ViewModel()
+{
+this.students = [];
+this.selectedRow=null;
+this.selecteIndex=-1;
+}
+
+var viewModel=new ViewModel();
+
+function selectRow(r,i)
+{
+if(r==viewModel.selectedRow)return;
+if(viewModel.selectedRow!=null)
+{
+viewModel.selectedRow.style.background='#ffffff';
+viewModel.selectedRow.style.color='#000000';
+}
+viewModel.selectedRow=r;
+viewModel.selectedIndex=i;
+r.style.background='#000000';
+r.style.color='#ffffff';
+
+}
+var city=new City();
+var student = new Student();
+city.code=1;
+city.name='Ujjain';
+student.name='rekha gupta'; 
+student.rollNumber=102;
+student.gender='F';
+student.city=city;
+student.address='freeganj';
+student.indian=true;
+student.dob='10/09/1980';
+viewModel.students[0]=student;
+
+student = new Student();
+city.code=1;
+city.name='Ujjain';
+student.name= 'Bhumika gupta'; 
+student.rollNumber=104;
+student.gender='F';
+student.city=city;
+student.address='mangal colony';
+student.indian=true;
+student.dob='10/09/1980';
+viewModel.students[1]=student;
+
+student = new Student();
+city.code=3;
+city.name='Delhi';
+student.name='Ashutosh gupta'; 
+student.rollNumber=105;
+student.gender='M';
+student.city=city;
+student.address='sarojani nagar';
+student.indian=false;
+student.dob='24/12/1990';
+viewModel.students[2]=student;
+
+
+student = new Student();
+city.code=3;
+city.name='Delhi';
+student.name='Ashi gupta'; 
+student.rollNumber=106;
+student.gender='F';
+student.city=city;
+student.address='sarojani nagar';
+student.indian=true;
+student.dob='24/12/1990';
+viewModel.students[3]=student;
+
+
+student = new Student();
+city.code=3;
+city.name='Delhi';
+student.name='Ashutosh Gautam'; 
+student.rollNumber=107;
+student.gender='M';
+student.city=city;
+student.address='sarojani nagar';
+student.indian=true;
+student.dob='24/12/1990';
+viewModel.students[4]=student;
+
+
+student = new Student();
+city.code=3;
+city.name='Delhi';
+student.name='Annanya Jain'; 
+student.rollNumber=108;
+student.gender='F';
+student.city=city;
+student.address='sarojani nagar';
+student.indian=false;
+student.dob='24/12/1990';
+viewModel.students[5]=student;
+
+
+student = new Student();
+city.code=3;
+city.name='Delhi';
+student.name='Sharad Komal Gupta'; 
+student.rollNumber=109;
+student.gender='M';
+student.city=city;
+student.address='sarojani nagar';
+student.indian=false;
+student.dob='24/12/1990';
+viewModel.students[6]=student;
+
+function linearSort()
+{
+var m;
+for(e=0;e<viewModel.students.length;e++)
+{
+
+for(f=e+1;f<viewModel.students.length;f++)
+{
+if(viewModel.students[e].name.toUpperCase().localeCompare(viewModel.students[f].name.toUpperCase())>0)
+{
+m=viewModel.students[e];
+viewModel.students[e]=viewModel.students[f];
+viewModel.students[f]=m;
+}
+}
+
+}<!--linearSort() ends-->
+
+}
+
+function searchStudent(t)
+{
+t.style.color='black'
+if(t.value.length == 0) return;
+var i;
+for(i=0;i<viewModel.students.length;i++)
+{
+if(viewModel.students[i].name.toUpperCase().startsWith(t.value.toUpperCase()))break;
+}
+if(i==viewModel.students.length)
+{
+t.style.color='red';
+}
+var divGrid = document.getElementById('viewContainerDivision');
+var viewContainer=document.getElementById('StudentViewGrid');
+var selectedRowAddress=viewContainer.rows.item(i);
+selectRow(selectedRowAddress,i);
+selectedRowAddress.scrollIntoView();
+}
+
+function initialize()
+{
+var row,cell,img;
+var tableBody = document.getElementById('StudentViewGrid');
+var i =0;
+linearSort();
+for(i=0;i<viewModel.students.length;i++)
+{ 
+row = document.createElement('tr');
+cell = document.createElement('td');
+textNode = document.createTextNode(viewModel.students[i].name);
+cell.appendChild(textNode);
+cell.textAlign='left';
+row.append(cell);
+cell = document.createElement('td');
+textNode = document.createTextNode(viewModel.students[i].rollNumber);
+cell.appendChild(textNode);
+row.append(cell);
+cell = document.createElement('td');
+textNode = document.createTextNode(viewModel.students[i].city.name);
+cell.appendChild(textNode);
+row.append(cell);
+cell=document.createElement('td');
+img=document.createElement('img');
+if(viewModel.students[i].gender=='M')
+{
+img.src='/styleone/images/male.png';
+}
+else
+{
+img.src='/styleone/images/female.png';
+}
+cell.appendChild(img);
+row.append(cell);
+cell=document.createElement('td');
+img=document.createElement('img');
+if(viewModel.students[i].indian==true)
+{
+img.src='/styleone/images/checked.png';
+}
+else
+{
+img.src='/styleone/images/unchecked.png';
+}
+cell.appendChild(img);
+row.append(cell);
+cell=document.createElement('td');
+img=document.createElement('img');
+img.src='/styleone/images/edit.png';
+img.onclick = createStudentEditHandler(i);
+
+cell.appendChild(img);
+row.append(cell);
+
+cell=document.createElement('td');
+img=document.createElement('img');
+img.src='/styleone/images/delete.png';
+img.onclick = createStudentDeleteHandler(i);
+cell.appendChild(img);
+row.append(cell);
+
+cell = document.createElement('td');
+img = document.createElement('img');
+img.src = '/styleone/images/details.png';
+img.onclick = createDetailsViewGridHandler(i);
+cell.appendChild(img);
+row.append(cell);
+row.style.cursor='pointer';
+row.onclick=createSelectStudentRowHandler(row,i); <!-- we are placing a call to the function createSelectStudentRowHandler and passing the current value of i and address of row to it -->
+tableBody.appendChild(row);
+}//for ends
+
+}
+function switchToAddStudentForm()
+{
+var searchDivision = document.getElementById('searchStudentViewContainer');
+var division=document.getElementById('viewContainerDivision');
+var addDivision = document.getElementById('addStudentDivision');
+var form = document.getElementById('addStudentForm');
+division.style.display='none';
+searchDivision.style.display='none';
+addDivision.style.display='block';
+
+}
+
+window.addEventListener('load',initialize);
+</script>
+</head>
+<body>
+<center>
+<table width='100%'>
+<tr>
+<td width='70px' ><a href='/styleone/index.html'> <img src='/styleone/images/logo.png'></a></td>
+<td style='padding=5pt;color:#b03a2e;font-size:20px;font-weight:bold'>ABCD Corporation</td>
+</tr>
+<tr>
+</table>
+<div id='searchStudentViewContainer' name='searchStudentViewContainer'>
+<table id='searchStudentGrid' name='searchStudentGrid'>
+<td><h1>Search</h1></td>
+<td><input type='text' id='searchText' oninput='searchStudent(this)' placeholder='Search Student'></td>
+</tr>
+<tr align='right'>
+<td><button onclick='switchToAddStudentForm()'>Add</button></td>
+</tr>
+</table>
+</div>
+<div id='viewContainerDivision' style='height:400px;display:block;overflow:scroll;border:1px solid black'> 
+<center>
+<table padding='3px'  border='1' id='viewContainer' style='display:block' name='viewContainer'>
+<thead width='40px'>
+<tr >
+<td>Name</td>
+<td>Roll Number</td>
+<td>City Name</td>
+<td>Gender</td>
+<td>Indian</td>
+<td>Edit</td>
+<td>Delete</td>
+<td>Details</td>
+</tr>
+</thead>
+<tbody id='StudentViewGrid'  >
+</tbody>
+</table>
+</center>
+</div>
+<div id='gridContainer'>
+<table id='detailsViewContainer' style='display:none;width:100%;align:center' name='detailsViewContainer'>
+<tr><td>Name</td><td> <span id='studentViewGridName' name='studentViewGridName'> </td>
+</tr>
+<tr><td>Roll Number</td><td><span id='studentViewGridRollNumber' name='studentViewGridRollNumber'></td>
+</tr>
+<tr>
+<td>Address</td>
+<td> <span id='studentViewGridAddress' name='studentViewGridAddress'> </td>
+</tr>
+<tr>
+<td>
+<button style='visiblity:hidden' onclick='swicthToGridView()'><span id='backButton' name='backButton'></button>
+</td>
+</tr>
+</table>
+</div>
+<div id='addStudentDivision' name='addStudentDivision' style='display:none'>
+<form action='/styleone/addStudent' id='studentAddForm' name='studentAddForm'>
+<table id='addStudentViewContainer' name='addStudentViewContainer'>
+<tr><td>Name</td>
+<td><input type='text' id='name' name='name'></td>
+</tr>
+<tr>
+<td>Roll Number</td>
+<td>
+<input type='text' id='rollNumber' name='rollNumber'>
+</td></tr>
+<tr >
+<td><button onclick='/styleone/students/html'>Cancel</button></td>
+<td><button type='submit' >Confirm </button></td>
+</tr>
+</form>
+</table>
+</div>
+<div id='editStudentDivision' style='display:none'>
+<form action ='/styleone/editStudent' id='studentEditForm' name='studentEditForm'  > 
+<table>
+<tr><td>Name</td>
+<td><input type='hidden' id='name' name='name'>
+</td></tr>
+<tr><td>Roll Number</td>
+<td><input type='hidden' id='rollNumber' name='rollNumber'>
+</td></td>
+<tr><td><button onclick='switchToGridView()'>Back</td></td>
+<td><button type='submit'>Confirm</button>
+</td></tr>
+</table>
+</form>
+</div>
+<div id='deleteStudentConfirmDivision' name='deleteStudentConfirmDivision'>
+<form action='/styleone/confirmDeleteStudent' id='studentDeleteForm' name='studentDeleteForm'> 
+<input type='hidden' id='studentDeleteName' name='studentDeleteName'>
+</form>
+</div>
+</center>
+</body>
+</html>
