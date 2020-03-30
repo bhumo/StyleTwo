@@ -1,0 +1,1 @@
+javac -classpath c:\tomcat9\webapps\styletwo\WEB-INF\lib\derbyclient.jar;c:\tomcat9\lib\*;c:\tomcat9\webapps\styletwo\WEB-INF\classes;. *.java
