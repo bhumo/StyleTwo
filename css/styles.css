@@ -1,0 +1,62 @@
+.mainLayout{
+width:100%;
+}
+
+.logo{
+width:40px;
+padding:2px;
+text-align:center;
+}
+
+.companyTitle{
+padding:5pt;
+color:#b03a2e;
+font-weight:bold;
+font-size:16pt;
+}
+
+.navigation{
+color:#b03a2e;
+margin-top:3px;
+}
+
+.studentViewContainer{
+height:400px;
+display:block;
+overflow:scroll;
+border:1px ;
+solid black';
+
+}
+
+.studentViewGrid{
+padding:3px;
+display:block; 
+overflow:scroll;
+}
+
+h1 {
+font-family: Verdana;
+font-size: 24pt;
+font-weight: bold;
+}
+
+
+.showElement{
+display:block;
+}
+
+.hideElement{
+display:none;
+}
+.unselectedRow
+{
+background-color:#ffffff;
+color:#000000;
+}
+
+.selectedRow
+{
+background-color:#000000;
+color:#ffffff;
+}
