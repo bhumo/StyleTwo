@@ -6,7 +6,7 @@
 <div>
 <button onclick='switchToForm(1)' >Add</button>
 </div>
-<div id='viewContainerDivision' class='studentViewContainer'> 
+<div id='viewContainerDivision' class='studentViewContainer showElement'> 
 <table border='1' id='studentViewGridTable' class='studentViewGrid'>
 <thead width='80px'>
 <tr >
@@ -77,15 +77,34 @@
 <td><button type='button' onclick='switchToView(1)'>Back</button></td>
 <td><button type='submit'>Add</button></td>
 </tr>
-
 </table>
 </form>
 </div>
 
-<div id = 'deleteFormDivision' class='hidden'>
-<form action='/styletwo/deleteStudent.jsp'  id='deleteStudentID' name='deleteStudentID' method='post'>
+<div id='deleteFormDivision' class='hideElement'>
+<form action='/styletwo/deleteStudent.jsp' method='post' id='deleteStudentID'>
 <input type='hidden' id='roll_number' name='roll_number'>
-</from>
+<button type='submit'>Submit</button>
+</form>
 </div>
+<div id='detailsViewDivision' class='hideElement studentViewContainer'>
+<table border='1' id='detailsViewContainer' class='studentViewGrid'>
+<tr>
+<td>RollNumber</td>
+<td></td>
+</tr>
+<tr>
+<td>Name</td>
+<td><input type='text' id='detailsName'> </td>
+</tr>
+<tr>
+<td>Gender</td>
+<td><span id='detailsGender'></td>
+</tr>
+<td><button onclick='switchToView(2)'>Back</button></td>
+</tr>
+</table>
+</div>
+
 
 <jsp:include page='/MasterPageBottomSection.jsp' />

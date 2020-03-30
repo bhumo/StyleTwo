@@ -111,7 +111,7 @@ row.append(cell);
 cell = document.createElement('td');
 img = document.createElement('img');
 img.src = '/styletwo/images/details.png';
-img.onclick = '';
+img.onclick = createStudentViewDetailsHandler(index);
 cell.appendChild(img);
 row.append(cell);
 row.className='unselectedRow';
@@ -151,7 +151,23 @@ alert('student with rollNumber' +rl+'not found');
 }
 
 }
+function studentViewDetails(i)
+{
+var viewContainer=document.getElementById('viewContainerDivision');
+var detailsContainer = document.getElementById('detailsViewDivision');
+detailsContainer.className='showElement';
+viewContainer.className='hideElement';
+var name =document.getElementById('detailsName');
+name.value=viewModel.students[i].name;
 
+}
+function createStudentViewDetailsHandler(i)
+{
+return function()
+{
+studentViewDetails(i);
+}
+}
 function createSelectStudentRowHandler(row,i)
 {
 return function(){
@@ -169,14 +185,16 @@ function deleteStudent(row,index)
 {
 var viewContainer = document.getElementById('viewContainerDivision');
 var div= document.getElementById('deleteFormDivision');
-viewContainer.className.display='none';
-div.className.display='block';
+viewContainer.className='hideElement';
+div.className='showElement';
 alert(div);
 var form = document.getElementById('deleteStudentID');
-alert(form);
+alert('delete form');
 form.roll_number.value=viewModel.students[index].rollNumber;
-form.submit();
+	
 }
+
+
 function selectRow(r,i)
 {
 if(r==viewModel.selectedRow)return;
@@ -242,11 +260,18 @@ if(k==1)
 {
 var division=document.getElementById("viewContainerDivision");
 var addFormDiv = document.getElementById("addFormDivision");
-var Form =document.getElementById('addStudentForm');
 addFormDiv.className='hideElement';
 division.className='showElement';
-alert("switch to view");
+alert("switch to view from delete");
+}
 
+if(k==2)
+{
+var division=document.getElementById("viewContainerDivision");
+var detailsViewDiv = document.getElementById("detailsViewDivision");
+detailsViewDiv.className='hideElement';
+division.className='showElement';
+alert('swicthToView');
 }
 
 }
@@ -261,6 +286,7 @@ var addFormDiv = document.getElementById("addFormDivision");
 addFormDiv.className='showElement';
 alert('switchToForm');
 }
+
 }
 
 </script>
