@@ -1,0 +1,1 @@
+insert into student (roll_number,name,city_code,address,gender,indian,date_of_birth) VALUES(20,'bhumika',1,'106,Mangal,Colony','F',true,'10/09/1998');
