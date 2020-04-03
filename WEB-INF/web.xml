@@ -46,4 +46,14 @@
        <servlet-name> AddStudent </servlet-name>
         <url-pattern>/addStudent</url-pattern>
      </servlet-mapping>  
+
+      <servlet>
+      <servlet-name>EditStudent</servlet-name>
+      <servlet-class>com.thinking.machines.school.servlets.EditStudent</servlet-class>
+     </servlet>
+
+     <servlet-mapping>
+       <servlet-name> EditStudent </servlet-name>
+        <url-pattern>/editStudent</url-pattern>
+     </servlet-mapping>  
 </web-app>
