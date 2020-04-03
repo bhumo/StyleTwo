@@ -28,9 +28,12 @@ this.selectedRow=null;
 var viewModel = new ViewModel();
 var rollNumberScenario=-1;
 
-<!--<tm:Equals name='scenario' value='added' >
+<tm:Equals name='scenario' value='added' >
 rollNumberScenario=${studentBean.roll_number};
-</tm:Equals>-->
+</tm:Equals>
+<tm:Equals name='scenario' value='edited'>
+rollNumberScenario=${studentBean.roll_number};
+</tm:Equals>
 
 
 var s;
@@ -94,7 +97,7 @@ row.append(cell);
 cell=document.createElement('td');
 img=document.createElement('img');
 img.src='/styletwo/images/edit.png';
-img.onclick = '';
+img.onclick = createStudentEditHandler(row,index);
 cell.appendChild(img);
 row.append(cell);
 
@@ -122,9 +125,47 @@ tableBody.appendChild(row);
 if(rollNumberScenario >0)
 {
 searchStudentByRollNumber(rollNumberScenario);
-}
+}<!-- If their is a bean with the name of scenario and value added/edited it will call this function.-->
 }<!-- initializeView() ends-->
 window.addEventListener('load',initializeView);
+
+
+function createStudentEditHandler(r,i)
+{
+
+return function()
+{
+editStudent(r,i);
+}
+}
+
+function editStudent(row,i)
+{
+var table = document.getElementById("editViewContainer");
+var spanRL =document.getElementById("rollNoSpan");
+
+spanRL.innerHTML=viewModel.students[i].rollNumber;
+table.rows[0].cells[1].children[0].value=viewModel.students[i].rollNumber;
+table.rows[1].cells[1].children[0].value=viewModel.students[i].name;
+table.rows[2].cells[1].children[0].value=viewModel.students[i].address;
+table.rows[3].cells[1].children[0].value=viewModel.students[i].city.code;
+table.rows[4].cells[1].children[0].value=viewModel.students[i].gender;
+if(viewModel.students[i].gender=="F")
+{
+table.rows[4].cells[1].children[0].checked=true;
+
+}
+else
+{
+table.rows[4].cells[1].children[0].checked=true;
+}
+
+table.rows[5].cells[1].children[0].value=viewModel.students[i].indian;
+table.rows[5].cells[1].children[0].checked=viewModel.students[i].indian;
+
+table.rows[6].cells[1].children[0].value=viewModel.students[1].dateOfBirth;
+switchToForm(3);
+}
 
 function searchStudentByRollNumber(rl)
 {
@@ -274,6 +315,16 @@ division.className='showElement';
 alert('swicthToView');
 }
 
+if(k==3)
+{
+var division=document.getElementById("viewContainerDivision");
+var editViewDiv = document.getElementById("editFormDivision");
+editViewDiv.className='hideElement';
+division.className='showElement';
+alert('swicthToView from edit');
+
+}
+
 }
 
 function switchToForm(k)
@@ -287,6 +338,15 @@ addFormDiv.className='showElement';
 alert('switchToForm');
 }
 
+if(k==3)
+{
+alert("here");
+var division=document.getElementById("viewContainerDivision");
+division.className='hideElement';
+var editFormDiv = document.getElementById("editFormDivision");
+editFormDiv.className='showElement';
+alert('switch To edit Form');
+}
 }
 
 </script>

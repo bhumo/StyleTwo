@@ -106,5 +106,65 @@
 </table>
 </div>
 
+<div id='editFormDivision' class='hideElement'>
+<form action='/styletwo/editStudent.jsp' id='editStudentForm' method='post'>
+<table border='1' id='editViewContainer'>
+<tr>
+<td>Roll Number </td><td>
+<input type='hidden' id='roll_number' name='roll_number' >
+<span id='rollNoSpan'>
+</td>
+</tr>
+
+ <tr>
+<td>Name</td>
+<td><input type='text' id='name' name='name'></td>
+</tr>
+
+<tr>
+<td>Address</td>
+<td><input type='text' id='address' name='address'></td>
+</tr>
+
+<tr>
+<td>City</td>
+<td><select id='city_code' name='city_code'>
+<option value='5'>Agar</option>
+<option value='6'>Agra</option>
+<option value='4'>Bombay</option>
+<option value='7'>Delhi</option>
+<option value='2'>Dewas</option>
+<option value='3'>Indore</option>
+<option value='1'>Ujjain</option>
+</select></td>
+</tr>
+
+<tr>
+<td>Gender</td>
+<td><input type='radio' value='F' name='gender' id='gender'>Female
+&nbsp;&nbsp;
+<input type='radio' value='M' name='gender' id='gender'>Male
+</td></tr>
+
+
+<tr>
+<td>Indian</td>
+<td><input type='checkbox' id='indian' name='indian' value='true'> </td>
+</tr>
+
+<tr>
+<td>Date Of Birth</td>
+<td><input type='text' id='date_of_birth' name='date_of_birth'> </td>
+</tr>
+
+<tr>
+<td><button type='button' onclick='switchToView(3)'>Back</button></td>
+<td><button type='submit'>Submit</button></td>
+</tr>
+</table>
+
+</form>
+</div>
+
 
 <jsp:include page='/MasterPageBottomSection.jsp' />
